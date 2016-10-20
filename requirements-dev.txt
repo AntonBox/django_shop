@@ -1,0 +1,6 @@
+-r requirements.txt
+
+ipdb
+mock
+django-debug-toolbar
+django-test-without-migrations

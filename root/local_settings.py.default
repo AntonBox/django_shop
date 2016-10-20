@@ -1,0 +1,12 @@
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'shop',
+        'USER': 'shop',
+        'PASSWORD': 'shop',
+        'HOST': '',  # Live empty for localhost.
+        'PORT': '',  # Live empty for default.
+    }
+}
+
+DEBUG = True

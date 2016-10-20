@@ -1,0 +1,11 @@
+*.pyc
+local_settings.py
+.env
+__pycache__
+mediafiles/
+staticfiles/
+.idea/
+dump.rdb
+
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
