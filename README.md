@@ -61,7 +61,7 @@ In the project directory:
 
 ```
     sudo -i -u postgres
-    createuser -d -W shop
+    createuser shop -P
     createdb shop -O shop
     exit
 ```
