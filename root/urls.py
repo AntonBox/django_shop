@@ -1,7 +1,6 @@
 from django.contrib import admin
-from django.conf.urls import url, include
+from django.conf.urls import url
 
 urlpatterns = [
-    url(r'^order/', include('apps.order.urls')),
     url(r'^admin/', admin.site.urls),
 ]
