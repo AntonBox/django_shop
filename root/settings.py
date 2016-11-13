@@ -27,6 +27,7 @@ WSGI_APPLICATION = 'root.wsgi.application'
 ROOT_URLCONF = 'root.urls'
 
 INSTALLED_APPS = [
+    'suit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
