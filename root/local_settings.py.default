@@ -4,7 +4,7 @@ DATABASES = {
         'NAME': 'shop',
         'USER': 'shop',
         'PASSWORD': 'shop',
-        'HOST': '',  # Live empty for localhost.
+        'HOST': 'localhost',
         'PORT': '',  # Live empty for default.
     }
 }
