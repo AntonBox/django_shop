@@ -86,7 +86,7 @@ DATABASES = {
         'USER': 'shop',
         'PASSWORD': 'shop',
         'HOST': 'localhost',
-        'PORT': '',  
+        'PORT': '',
     }
 }
 
