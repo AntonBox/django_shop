@@ -1,5 +1,6 @@
 *.pyc
 local_settings.py
+db.sqlite3
 .env
 __pycache__
 mediafiles/
