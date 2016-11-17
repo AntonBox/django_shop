@@ -1,4 +1,5 @@
-            <!-- *** NAVBAR *** _________________________________________________________ -->
+            <!-- *** NAVBAR *** -->
+            {% load staticfiles %}
 
             <div class="navbar-affixed-top" data-spy="affix" data-offset-top="200">
 
@@ -7,9 +8,8 @@
                     <div class="container">
                         <div class="navbar-header">
 
-                            <a class="navbar-brand home" href="index.html">
-                                <img src="img/logo.png" alt="Universal logo" class="hidden-xs hidden-sm">
-                                <img src="img/logo-small.png" alt="Universal logo" class="visible-xs visible-sm"><span class="sr-only">Universal - go to homepage</span>
+                            <a class="navbar-brand home" href="#">
+                                <img src="{% static "img/logo.png" %}" alt="Universal logo" class="hidden-xs hidden-sm">   
                             </a>
                             <div class="navbar-buttons">
                                 <button type="button" class="navbar-toggle btn-template-main" data-toggle="collapse" data-target="#navigation">
@@ -45,7 +45,7 @@
                                             <div class="yamm-content">
                                                 <div class="row">
                                                     <div class="col-sm-6">
-                                                        <img src="img/template-easy-customize.png" class="img-responsive hidden-xs" alt="">
+                                                        <img src="{% static "img/template-easy-customize.png" %}" class="img-responsive hidden-xs" alt="">
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <h5>Shortcodes</h5>
@@ -91,7 +91,7 @@
                                             <div class="yamm-content">
                                                 <div class="row">
                                                     <div class="col-sm-6">
-                                                        <img src="img/template-homepage.png" class="img-responsive hidden-xs" alt="">
+                                                        <img src="{% static "img/template-homepage.png" %}" class="img-responsive hidden-xs" alt="">
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <h5>Portfolio</h5>
