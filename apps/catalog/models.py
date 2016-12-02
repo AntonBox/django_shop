@@ -21,5 +21,5 @@ class Product (TimedModel):
     quantity = models.PositiveIntegerField()
     image = models.ImageField(upload_to='static/img')
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
