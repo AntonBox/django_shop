@@ -3555,3 +3555,47 @@ a.list-group-item.active > .badge,
   left: 15px;
   right: 15px;
 }
+.product{
+  width: 187px;
+  height: 230px;
+  border-right: 1px solid #6aae7a;
+  border-bottom: 1px solid #6aae7a;
+  margin-bottom: 5px;
+  display: inline-block;
+}
+.product-image{
+  width:128px;
+  height:128px;
+}
+.catalog{
+  width: 900px;
+}
+.price{
+  height: 27px;
+  width: 60px;
+  background-color: #FF811F;
+  display: inline-block;
+  float: left;
+  padding-top: 5px;
+}
+.button-product{
+  height: 30px;
+  width: 35px;
+  float: left;
+  display: inline-block;
+  padding: 0;
+}
+.filt{
+  width: 160px;
+  height: 80px;
+  display: inline-block;
+  background-color: #6aae7a;
+}
+
+
+#mobtel {
+}
+#allprod {
+}
+#cons {
+}
