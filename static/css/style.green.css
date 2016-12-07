@@ -3585,3 +3585,17 @@ a.list-group-item.active > .badge,
   display: inline-block;
   padding: 0;
 }
+.filt{
+  width: 160px;
+  height: 80px;
+  display: inline-block;
+  background-color: #6aae7a;
+}
+
+
+#mobtel {
+}
+#allprod {
+}
+#cons {
+}
