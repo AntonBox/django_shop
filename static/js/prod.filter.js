@@ -1,3 +1,4 @@
+/*
 $(document).ready(function(){
    // animating products
 	$('.product-image').mouseenter(function() {
@@ -32,7 +33,6 @@ $(document).ready(function(){
 	});
 
 });
-/*	
 
 
 var $target = $('ol li:nth-child(4)');

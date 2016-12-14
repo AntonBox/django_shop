@@ -1,16 +1,19 @@
 from django.db import models
 from root.base_models import TimedModel
+from django.db.models import permalink
 
 
 class Category(TimedModel):
     name = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255)
     description = models.TextField()
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
-    class Meta:
-        verbose_name_plural = 'Categories'
+    @permalink
+    def get_absolute_url(self):
+        return ('view_category_url', None, {'slug': self.slug})
 
 
 class Product (TimedModel):
