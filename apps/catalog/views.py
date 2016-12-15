@@ -14,6 +14,6 @@ def catalog(request):
 def view_category(request, slug):
     category = get_object_or_404(Category, slug=slug)
     return render_to_response('catalog.html', {
-        'category': category,
+        'categories': Category.objects.all(),
         'products': Product.objects.filter(category=category)
     })

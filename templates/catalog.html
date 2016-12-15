@@ -1,67 +1,42 @@
 {% extends "base.html" %}
 {% block title %}Catalog{% endblock %}
-{% block content %}
 {% load staticfiles %}
+{% block content %}
 
-<!--FILTER-->
-{% if categories %}
-	<div class = 'filter-container'>
-		{% for category in categories %}
-		<div class="filt full" id='butallprod'>
-			<a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
+
+<!--FILTER CATEGORIES-->
+{% block filter %}
+	{% if categories %}
+		<div class = 'filter-container'>
+			{% for category in categories %}
+			<div class="filt full" id='butallprod'>
+				<a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
+			</div>
+			{% endfor %}
 		</div>
+	{% else %}
+		<p>There are no categories</p>
+	{% endif %}	
+{% endblock %}
+
+<!--PRODUCTS-->
+{% block products %}
+	{% if products %}
+		<div class="container catalog">
+		{% for product in products %}
+			<div class = 'product'>
+				<img class="product-image" src="{{product.image.url}}">
+				<h4><a href="#">{{product.name}}</h4></a>
+				<div class='price'>
+					{{product.price}}	
+				</div>
+				<button class='button-product'><img src="{% static "img/korzina.jpg"%}" 
+				style="height: 30px; width:30px; align: center"></button>
+			</div>           	
 		{% endfor %}
-	</div>
-{% else %}
-	<p>Error category</p>
-{% endif %}	
-
-<div class="aaaaa">
-<!-- FULL CONTENT -->
- 
-<!-- MOBTEL CONTENT -->
-
-{% if products %}
-	<div class="container catalog">
-	{% for product in products %}
-		<div class = 'product'>
-			<h5><a href="#">{{product.category}}</h5></a>
-			<img class="product-image" src="{{product.image.url}}">
-			<h4><a href="#">{{product.name}}</h4></a>
-			<div class='price'>
-				{{product.price}}	
-			</div>
-			<button class='button-product'><img src="{% static "img/korzina.jpg"%}" 
-			style="height: 30px; width:30px; align: center"></button>
-		</div>           	
-	{% endfor %}
-	</div> 
-{% endif %}
-	
-
-<!-- CONSOLE CONTENT 
-<div class="container catalog" id='cons'>
-{% for product in products %}
-
-	{% if product.category|lower == 'console' %}
-		<div class = 'product con'>
-			<h5><a href="#">{{product.category}}</h5></a>
-			<img class="product-image" src="{{product.image.url}}">
-			<h4><a href="#">{{product.name}}</h4></a>
-			<div class='price'>
-				{{product.price}}	
-			</div>
-			<button class='button-product'><img src="{% static "img/korzina.jpg"%}" 
-			style="height: 30px; width:30px; align: center"></button>
-		</div>           	
+		</div> 
 	{% endif %}
-
-{% endfor %}
-</div> 
--->
-
-
-
+{% endblock %}
 
 
 {% endblock %}
@@ -71,5 +46,4 @@
 <script type="text/javascript" src="{% static "js/jquery-3.1.1.min.js" %}"></script>
 <script type="text/javascript" src="{% static "js/prod.filter.js" %}"></script>
 
-</div>
 {% endblock %}
