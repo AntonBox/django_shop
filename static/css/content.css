@@ -1,0 +1,21 @@
+.price  {
+width: 100%;
+float:right;
+overflow:hidden;
+right: -450px;
+bottom: 500px;
+position:relative;
+}
+
+.form  {
+width: 100%;
+right: -450px;
+bottom: 500px;
+position:relative;
+}
+
+
+.catalog  {
+right: -15px;
+position:relative;
+}

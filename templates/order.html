@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+ {% load staticfiles %}
+
+
+<div class="box">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/order.css' %}">
+    <form action="/order/" method="post">
+    <table class="brd">
+    <tr><td>  <div> <img class="product-image" src="{{product.image.url}}"  style="height: 50px; width:50px">  </div>
+    </td><td> {{product}}</td><td>{{quantity}}</td><td>{{price}}</td><td>{{summa}}</td> <td> <input type="submit" value="Оформить заказ"></td></tr>
+    </table>
+    </form>
+</div>
+
+
+
+
+{% endblock %}

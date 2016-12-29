@@ -5,7 +5,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^btemp/', include('apps.testview.urls')),
+    url(r'^btemp/', include('apps.catalog.urls')),
+    url(r'^order/', include('apps.cart.urls')),
+
+
 ]
 
 if settings.DEBUG:

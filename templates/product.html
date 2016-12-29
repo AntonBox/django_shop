@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+ {% block content %}
+
+  {% load staticfiles %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/content.css' %}">
+  <div class="catalog">
+
+          <h4>{{product.category}} {{product.name}}</h4>
+  <img class="product-image" src="{{product.image.url}}"  style="height: 300px; width:300px">
+
+      <div class ="description">
+      <h5>{{product.description}}</h5>
+      </div>
+  <div class='price'>
+          {{product.price}} руб. <p></p>
+  </div>
+  <div class ='form'>
+   <form action="/order/" method="post">
+   <input type="number" name = "quantity" >
+   <input type="hidden" value="{{ product.id }}" name = "prod" >
+   <input type="hidden" value="{{ product.price }}" name = "price" >
+   <input type="hidden" name="csrfmiddlewaretoken" value="{% csrf_token %}">
+   <input type="submit" value="Add to cart">
+   </form>
+ </div>
+
+  </div>
+
+{% endblock %}
