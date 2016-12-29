@@ -1,0 +1,10 @@
+.product-image{
+position: relative; left: 2px; top: 10px
+}
+table.brd {
+  width: 100%; /* Ширина таблицы */
+  background: white; /* Цвет фона таблицы */
+  color: black; /* Цвет текста */
+  border-spacing: 1px; /* Расстояние между ячейками */
+
+ }

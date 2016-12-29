@@ -3,7 +3,7 @@ from apps.catalog.models import Category, Product
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price', 'description')
+    list_display = ('id', 'name', 'price', 'description')
 
 
 class CategoryAdmin(admin.ModelAdmin):
