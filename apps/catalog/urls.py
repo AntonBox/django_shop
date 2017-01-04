@@ -1,8 +1,8 @@
 from django.conf.urls import url
-from apps.catalog.views import catalog, view_category
+from apps.catalog import views as catalog_views
 
 urlpatterns = [
-    url(r'^$', catalog),
-    url(r'^category/(?P<slug>[^\.]+).html',
-        view_category, name='view_category_url'),
+    url(r'^$', catalog_views.products, name='catalog'),
+    url(r'^category/(?P<slug>[-\w]+)$',
+        catalog_views.products, name='view_category'),
 ]
