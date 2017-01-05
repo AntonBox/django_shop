@@ -19,7 +19,7 @@ def view_category(request, slug):
     })
 '''
 
-
+'''
 def products(request, slug=None):
     if (slug is not None):
         category = get_object_or_404(Category, slug=slug)
@@ -34,3 +34,16 @@ def products(request, slug=None):
             'products': products,
             'categories': categories
         })
+'''
+
+
+def products(request, slug=None):
+    products = Product.objects.all()
+    categories = Category.objects.all()
+    if slug:
+        category = get_object_or_404(Category, slug=slug)
+        prod_dict = {'categories': Category.objects.all(),
+                     'products': Product.objects.filter(category=category)}
+    else:
+        prod_dict = {'products': products, 'categories': categories}
+    return render(request, 'catalog.html', prod_dict)
