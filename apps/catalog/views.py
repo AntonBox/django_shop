@@ -42,8 +42,6 @@ def products(request, slug=None):
     categories = Category.objects.all()
     if slug:
         category = get_object_or_404(Category, slug=slug)
-        prod_dict = {'categories': Category.objects.all(),
-                     'products': Product.objects.filter(category=category)}
-    else:
-        prod_dict = {'products': products, 'categories': categories}
-    return render(request, 'catalog.html', prod_dict)
+        products = Product.objects.filter(category=category)
+    return render(request, 'catalog.html', {'products': products,
+                                            'categories': categories})
