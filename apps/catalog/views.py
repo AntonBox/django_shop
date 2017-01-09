@@ -13,5 +13,7 @@ def products(request, slug=None):
 
 
 def main(request):
-    visuals = Carousel.objects.order_by('index').all()
-    return render(request, 'main.html', {'visuals': visuals})
+    visuals = Carousel.objects.order_by('index').filter(is_active=True).all()
+    products = Product.objects.order_by('created_at').all()[:4]
+    return render(request, 'main.html', {'visuals': visuals,
+                                         'products': products})
