@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from apps.catalog.models import Product, Category
+from apps.catalog.models import Product, Category, Carousel
 
 
 def products(request, slug=None):
@@ -10,3 +10,8 @@ def products(request, slug=None):
         products = products.filter(category=category)
     return render(request, 'catalog.html', {'products': products,
                                             'categories': categories})
+
+
+def main(request):
+    visuals = Carousel.objects.order_by('index').all()
+    return render(request, 'main.html', {'visuals': visuals})
