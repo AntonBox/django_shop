@@ -18,7 +18,7 @@
 {% endblock %}
 
 <!--PRODUCTS-->
-{% block products %}
+	{% block products %}
 <div class="container catalog">
 	{% for product in products %}
 	<div class = 'product'>
@@ -27,8 +27,10 @@
 		<div class='price'>
 			{{product.price}}	
 		</div>
-		<button class='button-product'><img src="{% static "img/korzina.jpg"%}" 
+		
+		<button class='button-product' id = '{{ product.id }}' onclick="addCart({{ product.id }})"><img src="{% static "img/korzina.jpg"%}" 
 		style="height: 30px; width:30px; align: center"></button>
+		
 	</div> 
 	{% empty %}
 		<p>There are no categories</p>          	
@@ -41,5 +43,16 @@
 {% block extra_script %}
 {% load staticfiles %}
 
+
+
+<!--
 <script type="text/javascript" src="{% static "js/jquery-3.1.1.min.js" %}"></script>
+-->
+<script type="text/javascript"src="{% static "js/jquery.cookie.js" %}"></script>
+<script type="text/javascript"src="{% static "js/add-cart.js" %}"></script>
+
+
+
+
+
 {% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Catalog{% endblock %}
+{% load staticfiles %}
+
+
+
+
+
+
+
+
+{% block content %}
+
+{% for cartitem in cartitems %}
+<div class="cartitems">
+	<p>{{cartitem.product.name}}</p>
+
+	<button name="{{ cartitem.id }}" onclick="delCart({{ cartitem.id }})"><img src="{% static "img/korzina.jpg"%}" 
+	style="height: 30px; width:30px; align: center"></button>
+
+	<input id="{{cartitem.id}}" type="text" class="quantity-input" value="1" maxlength="2" onchange="changeCart({{ cartitem.id }})">
+<div>
+{% empty %}
+
+<h1>FUCK</h1>
+
+{% endfor %}
+
+
+{% endblock %}
+
+
+
+
+
+
+
+{% block extra_script %}
+{% load staticfiles %}
+
+
+
+
+<script type="text/javascript" src="{% static "js/jquery-3.1.1.min.js" %}"></script>
+<script type="text/javascript"src="{% static "js/add-cart.js" %}"></script>
+
+
+{% endblock %}

@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^btemp/', include('apps.testview.urls')),
     url(r'^catalog/', include('apps.catalog.urls')),
+    url(r'^cart/', include('apps.cart.urls')),
 ]
 
 if settings.DEBUG:
