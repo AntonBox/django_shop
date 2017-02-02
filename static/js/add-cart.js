@@ -44,23 +44,45 @@ function addCart(productid){
 // deleting product from cart
 function delCart(cartitemid){
     $(document).ready(function(){
+        $delElement = $('input[id=' + cartitemid + ']');
         $.post(
             url = "/cart/",
-            {cartitemid: cartitemid}
+            {cartitemid: cartitemid},
+            onDellSuccess($delElement)
         );
     });
 }
 
+function onDellSuccess($delElement)
+{
+    $(document).ready(function(){
+        $delElement.parent().remove();
+    });
+    alert("Product deleted");
+}
+
+
 // changing quantity of selected product
-function changeCart(cartitemid){
+function changeCart(cartitemid, price){
     quantity = document.getElementById(cartitemid).value;
+    cartitemid = cartitemid;
+    price = price;
     $(document).ready(function(){
         $.post(
             url = "/cart/",
             {
             cartitem: cartitemid,
             quantity: quantity
-            }
+            },
+            onChangeSuccess(cartitemid, price, quantity)
         );
     });
+}
+
+function onChangeSuccess(cartitemid, price, quantity)
+{
+    price = price * quantity;
+    element = 'price' + cartitemid;
+    console.log(document.getElementById(element));
+    document.getElementById(element).innerHTML = price;
 }

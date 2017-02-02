@@ -62,7 +62,7 @@ button i.fa {
 .clickable {
   cursor: pointer !important;
 }
-.required {
+.reqired {
   color: #6aae7a;
 }
 .accent {
