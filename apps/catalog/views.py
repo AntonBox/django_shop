@@ -11,6 +11,8 @@ def products(request, slug=None):
     return render(request, 'catalog.html', {'products': products,
                                             'categories': categories})
 
-def product_detail(request, product_detail):
-	product_id = get_object_or_404(Product, id=pr)
 
+def product_detail(request, detail):
+    product_for_detail = get_object_or_404(Product, detail=detail)
+    return render(request, 'detail.html',
+                  {'product': product_for_detail})

@@ -29,6 +29,7 @@ def get_image_path(instance, filename):
 
 class Product (TimedModel):
     name = models.CharField(max_length=255)
+    detail = models.SlugField(max_length=255)
     category = models.ForeignKey(Category, related_name='products')
     price = models.DecimalField(max_digits=8, decimal_places=2)
     description = models.TextField()
@@ -37,3 +38,6 @@ class Product (TimedModel):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('product_detail', kwargs={'detail': self.detail})

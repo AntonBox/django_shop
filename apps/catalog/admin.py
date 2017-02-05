@@ -4,6 +4,7 @@ from apps.catalog.models import Category, Product
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'price', 'description')
+    prepopulated_fields = {'detail': ('name',)}
 
 
 class CategoryAdmin(admin.ModelAdmin):
