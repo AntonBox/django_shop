@@ -10,3 +10,7 @@ def products(request, slug=None):
         products = products.filter(category=category)
     return render(request, 'catalog.html', {'products': products,
                                             'categories': categories})
+
+def product_detail(request, product_detail):
+	product_id = get_object_or_404(Product, id=pr)
+
