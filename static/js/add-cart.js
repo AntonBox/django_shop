@@ -86,3 +86,19 @@ function onChangeSuccess(cartitemid, price, quantity)
     console.log(document.getElementById(element));
     document.getElementById(element).innerHTML = price;
 }
+
+function makeDeal(){
+    adress = 'adress'
+    phone = 'phone'
+    adress = document.getElementById(adress).value;
+    phone = document.getElementById(phone).value;
+    $(document).ready(function(){
+        $.post(
+            url = "/order/confirm/",
+            {
+            adress: adress,
+            phone: phone
+            }
+        );
+    });
+}
