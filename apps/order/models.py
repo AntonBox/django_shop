@@ -8,4 +8,4 @@ class Order(TimedModel):
     user = models.ForeignKey(User)
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     phone = models.CharField(max_length=20)
-    address = models.CharField(max_length=255)
+    adress = models.CharField(max_length=255)
