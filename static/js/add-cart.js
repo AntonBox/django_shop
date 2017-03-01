@@ -34,20 +34,24 @@ function onAddSuccess()
 function addCart(productid){
 	$(document).ready(function(){
 		$.post(
-			url = "/cart/",
-			{productid: productid},
+			url = "/cart/cartitem/",
+			{product: productid,
+            quantity: 1},
             onAddSuccess
 		);
 	});
 }
 
 // deleting product from cart
-function delCart(cartitemid){
+function delCart(cartitemid, prodId){
     $(document).ready(function(){
-        $delElement = $('input[id=' + cartitemid + ']');
+        $delElement = $('input[id=' + prodId + ']');
+        cartitemid = cartitemid;
         $.post(
-            url = "/cart/",
-            {cartitemid: cartitemid},
+            url = "/cart/del/",
+            {
+            cartitemid: cartitemid
+            },
             onDellSuccess($delElement)
         );
     });
@@ -65,13 +69,11 @@ function onDellSuccess($delElement)
 // changing quantity of selected product
 function changeCart(cartitemid, price){
     quantity = document.getElementById(cartitemid).value;
-    cartitemid = cartitemid;
-    price = price;
     $(document).ready(function(){
         $.post(
-            url = "/cart/",
+            url = "/cart/cartitem/",
             {
-            cartitem: cartitemid,
+            cartitemid: cartitemid,
             quantity: quantity
             },
             onChangeSuccess(cartitemid, price, quantity)

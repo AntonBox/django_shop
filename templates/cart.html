@@ -10,10 +10,13 @@
 			
 				<div class="cartitem">
 					<p>{{cartitem.product.name}}</p>
-					<button onclick="delCart({{ cartitem.id }})"><img src="{% static "img/korzina.jpg"%}" 
-					style="height: 20px; width:25px; align: center"></button>
-					<input id="{{cartitem.id}}" type="text" class="quantity-input" value="1" maxlength="2" onchange="changeCart({{ cartitem.id }},{{cartitem.product.price}})">
-					<div id='price{{cartitem.id}}'>
+					<button onclick="delCart({{ cartitem.id }}, {{ cartitem.product.id }})">
+						<img src="{% static "img/korzina.jpg"%}" 
+						style="height: 20px; width:25px; align: center">
+					</button>
+					<input id="{{cartitem.product.id}}" type="text"
+						 class="quantity-input" value="1" maxlength="2" onchange="changeCart({{ cartitem.product.id }},{{cartitem.product.price}})">
+					<div id='price{{cartitem.product.id}}'>
 						{{cartitem.product.price}}	
 					</div>
 				</div>
