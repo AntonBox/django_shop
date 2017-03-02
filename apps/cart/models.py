@@ -20,3 +20,6 @@ class CartItem(TimedModel):
     product = models.ForeignKey(Product)
     quantity = models.PositiveIntegerField()
     cart = models.ForeignKey(Cart, related_name='cartitems')
+
+    class Meta:
+        unique_together = ('product', 'cart')

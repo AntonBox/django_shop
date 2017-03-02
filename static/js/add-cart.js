@@ -71,9 +71,9 @@ function changeCart(cartitemid, price){
     quantity = document.getElementById(cartitemid).value;
     $(document).ready(function(){
         $.post(
-            url = "/cart/cartitem/",
+            url = "/cart/change/",
             {
-            cartitemid: cartitemid,
+            product: cartitemid,
             quantity: quantity
             },
             onChangeSuccess(cartitemid, price, quantity)
