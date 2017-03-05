@@ -4,11 +4,6 @@ from apps.catalog.models import Product
 from django.contrib.auth.models import User
 
 
-class CartItem(TimedModel):
-    product = models.ForeignKey(Product)
-    quantity = models.PositiveIntegerField()
-
-
 class Cart(TimedModel):
     OPEN = 'open'
     CLOSED = 'closed'
@@ -19,3 +14,12 @@ class Cart(TimedModel):
 
     def __str__(self):
         return self.status
+
+
+class CartItem(TimedModel):
+    product = models.ForeignKey(Product)
+    quantity = models.PositiveIntegerField()
+    cart = models.ForeignKey(Cart, related_name='cartitems')
+
+    class Meta:
+        unique_together = ('product', 'cart')
