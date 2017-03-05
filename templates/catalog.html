@@ -46,7 +46,7 @@
 					style="height: 30px; width:30px; align: center"></button>
 				</div> 
 			{% empty %}
-				<p>There are no categories</p>          	
+				<p>There are no products</p>          	
 			{% endfor %}
 		</div> 	
 	
@@ -58,5 +58,6 @@
 {% load staticfiles %}
 
 	<script type="text/javascript"src="{% static "js/add-cart.js" %}"></script>
+	<script type="text/javascript"src="{% static "js/csrf.js" %}"></script>
 
 {% endblock %}
