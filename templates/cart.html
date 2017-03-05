@@ -5,36 +5,24 @@
 
 {% block content %}
 	<div calss = "container">
-		<div class="cart">
+		<div class="cart text-center">
 			{% for cartitem in cartitems %}
-			
 				<div class="cartitem">
 					<p>{{cartitem.product.name}}</p>
-					<button onclick="delCart({{ cartitem.id }}, {{ cartitem.product.id }})">
+					<button onclick="delCart({{ cartitem.id }}, {{ cartitem.id }})">
 						<img src="{% static "img/korzina.jpg"%}" 
 						style="height: 20px; width:25px; align: center">
 					</button>
-					<input id="{{cartitem.product.id}}" type="text"
-						 class="quantity-input" value="1" maxlength="2" onchange="changeCart({{ cartitem.product.id }},{{cartitem.product.price}})">
-					<div id='price{{cartitem.product.id}}'>
+					<input id="{{cartitem.id}}" type="number"
+						 class="quantity-input" value="{{ cartitem.quantity }}" onchange="changeCart({{ cartitem.id }},{{cartitem.product.price}})">
+					<div id='price{{cartitem.id}}'>
 						{{cartitem.product.price}}	
 					</div>
 				</div>
 				<br>
-
 			{% empty %}
-				<h1>FUCK</h1>
+				<h1>Your cart is empty now :(</h1>
 			{% endfor %}
 		</div>	
 	</div>	
-{% endblock %}
-
-
-
-{% block extra_script %}
-{% load staticfiles %}
-
-<script type="text/javascript"src="{% static "js/add-cart.js" %}"></script>
-<script type="text/javascript"src="{% static "js/csrf.js" %}"></script>
-
 {% endblock %}

@@ -6,39 +6,29 @@ function onAddSuccess()
 }
 
 function addCart(productid){
-	$(document).ready(function(){
-		$.post(
-			url = "/cart/cartitem/",
-			{product: productid,
-            quantity: 1},
-            onAddSuccess
-		)
-    .fail(function() {
-    alert( "Product already in the cart" );
+	$.post(
+		url = "/cart/cartitem/",
+		{product: productid,
+        quantity: 1},
+        onAddSuccess
+	).fail(function() {
+        alert("Product already in the cart");
     });
-	});
 }
 
 // deleting product from cart
 function delCart(cartitemid, prodId){
-    $(document).ready(function(){
-        $delElement = $('input[id=' + prodId + ']');
-        cartitemid = cartitemid;
-        $.post(
-            url = "/cart/del/",
-            {
-            cartitemid: cartitemid
-            },
-            onDellSuccess($delElement)
-        );
-    });
+    
+    cartitemid = cartitemid;
+    $.post(
+        url = "/cart/del/",
+        {cartitemid: cartitemid},
+        onDellSuccess.bind(null, prodId)
+    );
 }
 
-function onDellSuccess($delElement)
-{
-    $(document).ready(function(){
-        $delElement.parent().remove();
-    });
+function onDellSuccess(prodId){
+    $('input[id=' + prodId + ']').parent().remove();
     alert("Product deleted");
 }
 
@@ -50,16 +40,15 @@ function changeCart(cartitemid, price){
         $.post(
             url = "/cart/change/",
             {
-            product: cartitemid,
-            quantity: quantity
+                cartitemid: cartitemid,
+                quantity: quantity
             },
-            onChangeSuccess(cartitemid, price, quantity)
+            onChangeSuccess.bind(null, cartitemid, price, quantity)
         );
     });
 }
 
-function onChangeSuccess(cartitemid, price, quantity)
-{
+function onChangeSuccess(cartitemid, price, quantity){
     price = price * quantity;
     element = 'price' + cartitemid;
     console.log(document.getElementById(element));
