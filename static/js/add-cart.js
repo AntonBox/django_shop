@@ -12,7 +12,10 @@ function addCart(productid){
 			{product: productid,
             quantity: 1},
             onAddSuccess
-		);
+		)
+    .fail(function() {
+    alert( "Product already in the cart" );
+    });
 	});
 }
 
