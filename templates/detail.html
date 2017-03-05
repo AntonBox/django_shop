@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Details{% endblock %}
+{% load staticfiles %}
+{% block content %}
+
+	{% if product %}
+
+		<div class = 'product'>
+			<img class="product-image" src="{{product.image.url}}">
+			<h4><a href="{{ product.get_absolute_url }}">{{product.name}}</h4></a>
+			<div class='price'>
+				{{product.price}}	
+			</div>
+			<button class='button-product'><img src="{% static "img/korzina.jpg"%}" 
+			style="height: 30px; width:30px; align: center"></button>
+		</div> 
+
+
+	{% else %}
+
+		<p>Sorry, there no product like this</p>
+
+	{% endif %}
+
+{% endblock %}
