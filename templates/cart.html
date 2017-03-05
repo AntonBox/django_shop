@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Cart{% endblock %}
+{% load staticfiles %}
+
+
+{% block content %}
+	<div calss = "container">
+		<div class="cart text-center">
+			{% for cartitem in cartitems %}
+				<div class="cartitem">
+					<p>{{cartitem.product.name}}</p>
+					<button onclick="delCart({{ cartitem.id }}, {{ cartitem.id }})">
+						<img src="{% static "img/korzina.jpg"%}" 
+						style="height: 20px; width:25px; align: center">
+					</button>
+					<input id="{{cartitem.id}}" type="number"
+						 class="quantity-input" value="{{ cartitem.quantity }}" onchange="changeCart({{ cartitem.id }},{{cartitem.product.price}})">
+					<div id='price{{cartitem.id}}'>
+						{{cartitem.product.price}}	
+					</div>
+				</div>
+				<br>
+			{% empty %}
+				<h1>Your cart is empty now :(</h1>
+			{% endfor %}
+		</div>	
+	</div>	
+{% endblock %}
