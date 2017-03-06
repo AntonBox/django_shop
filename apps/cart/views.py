@@ -7,9 +7,9 @@ from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 def cart(request):
     user = request.user
     try:
-        cart = Cart.objects.get(user=user, status='Open')
+        cart = Cart.objects.get(user=user, status='open')
     except (ObjectDoesNotExist, MultipleObjectsReturned):
-        cart = Cart(status='Open', user=user)
+        cart = Cart(status='open', user=user)
         cart.save()
 
     if request.is_ajax():

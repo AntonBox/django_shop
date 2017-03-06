@@ -1,27 +1,26 @@
 from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse
+
 from apps.cart.models import CartItem, Cart
-from apps.order.models import Order
+from apps.order.forms import AddOrderForm
 
 
 def order(request):
-    user = request.user
-    cart = get_object_or_404(Cart, user=user)
-    cart_items = CartItem.objects.filter(cart=cart)
-    total = 0
-    for item in cart_items:
-        price_for_item = item.quantity * item.product.price
-        total += price_for_item
+    cart = get_object_or_404(Cart, user=request.user, status=Cart.OPEN)
+    total = CartItem.total(CartItem, cart)
     return render(request, 'order.html', {'total': total})
 
 
 def confirm(request):
-    user = request.user
-    cart = get_object_or_404(Cart, user=user)
-    if request.is_ajax():
-        adress = request.POST.get('adress')
-        phone = request.POST.get('phone')
+    cart = get_object_or_404(Cart, user=request.user, status=Cart.OPEN)
+    form = AddOrderForm(request.POST)
+    if form.is_valid():
         cart.status = 'Closed'
         cart.save()
-        order = Order(user=user, cart=cart, phone=phone, adress=adress)
-        order.save()
-    return render(request, 'confirm.html')
+        obj = form.save(commit=False)
+        obj.cart = cart
+        obj.user = request.user
+        obj.save()
+        return HttpResponse(status=200)
+    else:
+        return HttpResponse({'message': 'Incorrect address or phone, or both!'}, status=400)

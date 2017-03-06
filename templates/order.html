@@ -9,17 +9,24 @@
 
 	{% else %}
 
-		<h1>Error total</h1>
-
 	{% endif %}
 
-	<p>adress</p>
-	<input id="adress" type="text" class="quantity-input">
-	<p>phone</p>
-	<input id="phone" type="text" class="quantity-input">
+	<form action="/order/confirm/" method="post">
+
+		<p>phone</p>
+		<input name="phone" type="text" class="quantity-input">
+		<p>adress</p>
+		<input name="address" type="text" class="quantity-input">
+
+		<input type="submit" value="Deal" />
+	</form>
+
+
 	<br>
 	<br>
-	<button onclick="makeDeal()">DEAL WITH IT</button>
+
+
+
 	<br>
 	<br>
 	
@@ -28,8 +35,5 @@
 
 {% block extra_script %}
 {% load staticfiles %}
-
-<script type="text/javascript"src="{% static "js/add-cart.js" %}"></script>
-<script type="text/javascript"src="{% static "js/jquery.cookie.js" %}"></script>
 
 {% endblock %}
