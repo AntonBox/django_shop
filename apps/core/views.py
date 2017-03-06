@@ -8,3 +8,6 @@ def index(request):
     products = Product.objects.order_by('created_at').all()[:4]
     return render(request, 'main.html', {'visuals': visuals,
                                          'products': products})
+
+def deal(request):
+	return render(request, 'confirm.html')

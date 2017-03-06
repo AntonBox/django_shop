@@ -5,8 +5,14 @@ from apps.cart.forms import EditItemForm, AddItemForm
 from apps.cart.models import Cart, CartItem
 
 
+def cart(request):
+    cart = Cart.get_user_cart_or_404(request.user)
+    cartitems = cart.cartitems.all()
+    return render(request, 'cart.html', {'cartitems': cartitems})
+
+
 def add_cartitem(request):
-    cart, _ = Cart.objects.get_or_create(user=request.user, status=Cart.OPEN)
+    cart = Cart.get_user_cart_or_404(request.user)
     form = AddItemForm(request.POST, cart=cart)
     if form.is_valid():
         obj = form.save(commit=False)

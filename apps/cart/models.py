@@ -15,6 +15,18 @@ class Cart(TimedModel):
     def __str__(self):
         return self.status
 
+    def get_total(self):
+        cart_items = CartItem.objects.filter(cart=self)
+        total = 0
+        for item in cart_items:
+            price_for_item = item.quantity * item.product.price
+            total += price_for_item
+        return total
+
+    def get_user_cart_or_404(user):
+        cart, _ = Cart.objects.get_or_create(user=user, status=Cart.OPEN)
+        return cart
+
 
 class CartItem(TimedModel):
     product = models.ForeignKey(Product)
