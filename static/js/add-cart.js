@@ -1,29 +1,3 @@
-// CSRF token
-$(document).ready(function(){
-        $.ajaxSetup({ 
-     beforeSend: function(xhr, settings) {
-         function getCookie(name) {
-             var cookieValue = null;
-             if (document.cookie && document.cookie != '') {
-                 var cookies = document.cookie.split(';');
-                 for (var i = 0; i < cookies.length; i++) {
-                     var cookie = jQuery.trim(cookies[i]);
-                     // Does this cookie string begin with the name we want?
-                     if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                         break;
-                     }
-                 }
-             }
-             return cookieValue;
-         }
-         if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
-             // Only send the token to relative URLs i.e. locally.
-             xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
-         }
-     } 
-}); 
-});
 
 //adding product to cart
 function onAddSuccess()
@@ -32,32 +6,29 @@ function onAddSuccess()
 }
 
 function addCart(productid){
-	$(document).ready(function(){
-		$.post(
-			url = "/cart/",
-			{productid: productid},
-            onAddSuccess
-		);
-	});
+	$.post(
+		url = "/cart/cartitem/",
+		{product: productid,
+        quantity: 1},
+        onAddSuccess
+	).fail(function() {
+        alert("Product already in the cart");
+    });
 }
 
 // deleting product from cart
-function delCart(cartitemid){
-    $(document).ready(function(){
-        $delElement = $('input[id=' + cartitemid + ']');
-        $.post(
-            url = "/cart/",
-            {cartitemid: cartitemid},
-            onDellSuccess($delElement)
-        );
-    });
+function delCart(cartitemid, prodId){
+    
+    cartitemid = cartitemid;
+    $.post(
+        url = "/cart/del/",
+        {cartitemid: cartitemid},
+        onDellSuccess.bind(null, prodId)
+    );
 }
 
-function onDellSuccess($delElement)
-{
-    $(document).ready(function(){
-        $delElement.parent().remove();
-    });
+function onDellSuccess(prodId){
+    $('input[id=' + prodId + ']').parent().remove();
     alert("Product deleted");
 }
 
@@ -65,40 +36,21 @@ function onDellSuccess($delElement)
 // changing quantity of selected product
 function changeCart(cartitemid, price){
     quantity = document.getElementById(cartitemid).value;
-    cartitemid = cartitemid;
-    price = price;
     $(document).ready(function(){
         $.post(
-            url = "/cart/",
+            url = "/cart/change/",
             {
-            cartitem: cartitemid,
-            quantity: quantity
+                cartitemid: cartitemid,
+                quantity: quantity
             },
-            onChangeSuccess(cartitemid, price, quantity)
+            onChangeSuccess.bind(null, cartitemid, price, quantity)
         );
     });
 }
 
-function onChangeSuccess(cartitemid, price, quantity)
-{
+function onChangeSuccess(cartitemid, price, quantity){
     price = price * quantity;
     element = 'price' + cartitemid;
     console.log(document.getElementById(element));
     document.getElementById(element).innerHTML = price;
-}
-
-function makeDeal(){
-    adress = 'adress'
-    phone = 'phone'
-    adress = document.getElementById(adress).value;
-    phone = document.getElementById(phone).value;
-    $(document).ready(function(){
-        $.post(
-            url = "/order/confirm/",
-            {
-            adress: adress,
-            phone: phone
-            }
-        );
-    });
 }

@@ -4,7 +4,7 @@
 
 
 {% block content %}
-	<div class="container">
+<div class="container">
 <!--FILTER CATEGORIES-->
 		<div class = 'filter-container'>
 			{% for category in categories %}
@@ -29,19 +29,9 @@
 					style="height: 30px; width:30px; align: center"></button>
 				</div> 
 			{% empty %}
-				<p>There are no categories</p>          	
+				<p>There are no products</p>          	
 			{% endfor %}
 		</div> 	
 	
 	</div>
-{% endblock %}
-
-
-{% block extra_script %}
-{% load staticfiles %}
-
-	
-	<script type="text/javascript"src="{% static "js/jquery.cookie.js" %}"></script>
-	<script type="text/javascript"src="{% static "js/add-cart.js" %}"></script>
-
 {% endblock %}

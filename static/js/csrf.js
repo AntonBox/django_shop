@@ -1,4 +1,5 @@
-$.ajaxSetup({ 
+$(document).ready(function(){
+        $.ajaxSetup({ 
      beforeSend: function(xhr, settings) {
          function getCookie(name) {
              var cookieValue = null;
@@ -20,4 +21,5 @@ $.ajaxSetup({
              xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
          }
      } 
+}); 
 });

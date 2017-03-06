@@ -21,10 +21,5 @@ class CartItem(TimedModel):
     quantity = models.PositiveIntegerField()
     cart = models.ForeignKey(Cart, related_name='cartitems')
 
-    def total(self, cart):
-        cart_items = self.objects.filter(cart=cart)
-        total = 0
-        for item in cart_items:
-            price_for_item = item.quantity * item.product.price
-            total += price_for_item
-        return total
+    class Meta:
+        unique_together = ('product', 'cart')
