@@ -1,18 +1,17 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
-from apps.cart.models import CartItem, Cart
 from apps.order.forms import AddOrderForm
 
 
 def order(request):
-    cart = Cart.get_user_cart_or_404(request.user)
+    cart = request.user.get_user_cart()
     total = cart.get_total()
     return render(request, 'order.html', {'total': total})
 
 
 def confirm(request):
-    cart = Cart.get_user_cart_or_404(request.user)
+    cart = request.user.get_user_cart()
     form = AddOrderForm(request.POST)
     if form.is_valid():
         cart.status = 'Closed'

@@ -2,17 +2,17 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 
 from apps.cart.forms import EditItemForm, AddItemForm
-from apps.cart.models import Cart, CartItem
+from apps.cart.models import CartItem
 
 
 def cart(request):
-    cart = Cart.get_user_cart_or_404(request.user)
+    cart = request.user.get_user_cart()
     cartitems = cart.cartitems.all()
     return render(request, 'cart.html', {'cartitems': cartitems})
 
 
 def add_cartitem(request):
-    cart = Cart.get_user_cart_or_404(request.user)
+    cart = request.user.get_user_cart()
     form = AddItemForm(request.POST, cart=cart)
     if form.is_valid():
         obj = form.save(commit=False)
