@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
+from apps.cart.models import Cart
 from apps.order.forms import AddOrderForm
 
 
@@ -14,12 +15,13 @@ def confirm(request):
     cart = request.user.get_user_cart()
     form = AddOrderForm(request.POST)
     if form.is_valid():
-        cart.status = 'Closed'
+        cart.status = Cart.CLOSED
         cart.save()
         obj = form.save(commit=False)
         obj.cart = cart
         obj.user = request.user
         obj.save()
-        return redirect('/deal/')
+        return render(request, 'confirm.html')
     else:
-        return HttpResponse({'message': 'Incorrect address or phone, or both!'}, status=400)
+        errors = form.errors.as_data()
+        return HttpResponse({'message': errors}, status=400)

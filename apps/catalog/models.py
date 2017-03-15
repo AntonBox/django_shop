@@ -40,4 +40,4 @@ class Product (TimedModel):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('product_detail', kwargs={'detail': self.detail})
+        return reverse('product_details', kwargs={'detail': self.detail})

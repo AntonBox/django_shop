@@ -3,6 +3,7 @@ from apps.catalog.models import Product, Category
 
 
 def products(request, slug=None):
+    print(request.session)
     products = Product.objects.all()
     categories = Category.objects.all()
     if slug:
@@ -12,7 +13,7 @@ def products(request, slug=None):
                                             'categories': categories})
 
 
-def product_detail(request, detail):
+def product_details(request, detail):
     product_for_detail = get_object_or_404(Product, detail=detail)
     return render(request, 'detail.html',
                   {'product': product_for_detail})

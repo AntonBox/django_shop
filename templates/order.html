@@ -1,17 +1,10 @@
 {% extends "base.html" %}
 {% block title %}Order{% endblock %}
-{% load staticfiles %}
 {% block content %}
 
-	{% if total %}
+	<h3>{{ total }}</h3>
 
-		<h3>{{ total }}</h3>
-
-	{% else %}
-
-	{% endif %}
-
-	<form action="/order/confirm/" method="post">
+	<form action="{% url 'confirm' %}" method="post">{% csrf_token %}
 
 		<label>phone</label>
 		<input name="phone" type="text" class="quantity-input">
@@ -20,20 +13,5 @@
 
 		<input type="submit" value="Deal" />
 	</form>
-
-
 	<br>
-	<br>
-
-
-
-	<br>
-	<br>
-	
-
-{% endblock %}
-
-{% block extra_script %}
-{% load staticfiles %}
-
 {% endblock %}

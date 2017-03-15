@@ -23,7 +23,9 @@
 			{% empty %}
 				<h1>Your cart is empty now :(</h1>
 			{% endfor %}
-			<button>GO TO DEAL</button>
+			
+			<a href="{% url 'order' %}"><button>GO TO DEAL</button></a>
+			
 		</div>	
 	</div>	
 {% endblock %}
