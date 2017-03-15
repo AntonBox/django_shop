@@ -1,5 +1,4 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.shortcuts import render
 
 from apps.cart.models import Cart
 from apps.order.forms import AddOrderForm
@@ -8,7 +7,8 @@ from apps.order.forms import AddOrderForm
 def order(request):
     cart = request.user.get_user_cart()
     total = cart.get_total()
-    return render(request, 'order.html', {'total': total})
+    form = AddOrderForm()
+    return render(request, 'order.html', {'total': total, 'form': form})
 
 
 def confirm(request):
@@ -23,5 +23,4 @@ def confirm(request):
         obj.save()
         return render(request, 'confirm.html')
     else:
-        errors = form.errors.as_data()
-        return HttpResponse({'message': errors}, status=400)
+        return render(request, 'order.html', {'form': form})

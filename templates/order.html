@@ -2,16 +2,28 @@
 {% block title %}Order{% endblock %}
 {% block content %}
 
-	<h3>{{ total }}</h3>
+	
 
+
+	{%if form%}
+	<h3>{{ total }}</h3>
+	<form action="{% url 'confirm' %}" method="post">{% csrf_token %}
+		{{form.as_p}}
+		<input type="submit" value="Deal" />
+	</form>
+	{% else %}
+	<!--
+	<h3>{{ total }}</h3>
 	<form action="{% url 'confirm' %}" method="post">{% csrf_token %}
 
-		<label>phone</label>
-		<input name="phone" type="text" class="quantity-input">
-		<label>adress</label>
-		<input name="address" type="text" class="quantity-input">
+		<label>Phone</label><br/>
+		<input name="phone" type="text" class="quantity-input"><br/>
+		<label>Adress</label><br/>
+		<input name="address" type="text" class="quantity-input"><br/>
 
 		<input type="submit" value="Deal" />
 	</form>
-	<br>
+
+	-->
+	{% endif %}
 {% endblock %}
