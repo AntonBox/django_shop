@@ -4,24 +4,7 @@
 
 
 {% block content %}
-
-{%if form%}
-
-{% for field in form %}
-    <div class="fieldWrapper">
-        {{ field.errors }}
-        {{ field.label_tag }} {{ field }}
-        {% if field.help_text %}
-        <p class="help">{{ field.help_text|safe }}</p>
-        {% endif %}
-    </div>
-{% endfor %}
-
-{%else%}
-{% endif%}
-
-
-	<div class="container">
+<div class="container">
 <!--FILTER CATEGORIES-->
 		<div class = 'filter-container'>
 			{% for category in categories %}
@@ -38,7 +21,7 @@
 			{% for product in products %}
 				<div class = 'product'>
 					<img class="product-image" src="{{product.image.url}}">
-					<h4><a href="#">{{product.name}}</h4></a>
+					<h4><a href="{{ product.get_absolute_url }}">{{product.name}}</h4></a>
 					<div class='price'>
 						{{product.price}}	
 					</div>
@@ -51,13 +34,4 @@
 		</div> 	
 	
 	</div>
-{% endblock %}
-
-
-{% block extra_script %}
-{% load staticfiles %}
-
-	<script type="text/javascript"src="{% static "js/add-cart.js" %}"></script>
-	<script type="text/javascript"src="{% static "js/csrf.js" %}"></script>
-
 {% endblock %}

@@ -7,5 +7,3 @@ class OrderAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.Order, OrderAdmin)
-
-
