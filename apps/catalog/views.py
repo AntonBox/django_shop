@@ -12,7 +12,7 @@ def products(request, slug=None):
                                             'categories': categories})
 
 
-def product_detail(request, detail):
+def product(request, detail):
     product_for_detail = get_object_or_404(Product, detail=detail)
-    return render(request, 'detail.html',
+    return render(request, 'details.html',
                   {'product': product_for_detail})
