@@ -8,7 +8,8 @@ class Cart(TimedModel):
     OPEN = 'open'
     CLOSED = 'closed'
     status_choice = ((OPEN, 'Open'), (CLOSED, 'Closed'))
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
+    token = models.CharField(max_length=16, blank=True, null=True)
     status = models.CharField(max_length=6,
                               choices=status_choice, default=CLOSED)
 
