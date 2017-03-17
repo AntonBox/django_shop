@@ -33,13 +33,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'django_extensions',
-
     'apps.order',
     'apps.cart',
     'apps.catalog',
-    'apps.core'
+    'apps.core',
+    'apps.accounts'
 ]
 
 MIDDLEWARE = [
@@ -82,6 +80,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+AUTH_USER_MODEL = 'accounts.User'
 
 DATABASES = {
     'default': {

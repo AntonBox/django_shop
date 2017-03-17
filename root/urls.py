@@ -8,7 +8,8 @@ urlpatterns = [
     url(r'^btemp/', include('apps.testview.urls')),
     url(r'^catalog/', include('apps.catalog.urls')),
     url(r'^cart/', include('apps.cart.urls')),
-    url(r'^', include('apps.core.urls')),
+    url(r'^order/', include('apps.order.urls')),
+    url(r'^', include('apps.core.urls'))
 ]
 
 if settings.DEBUG:
