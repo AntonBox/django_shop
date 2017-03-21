@@ -42,10 +42,19 @@
 		</div>
 
 	</div>
+
+	<div class="container">
 	<br>
 	<h3>Новинки</h3>
 	<br>
-	<div class="container catalog">
+		{% for category in categories %}
+			<div class = 'col-md-4'>
+				<img class="img-thumbnail" src="{{category.image.url}}">
+				<h4><a href="catalog/{{ category.get_absolute_url }}">{{category.name}}</h4></a>
+			</div>         	
+		{% endfor %}
+	</div>
+	<div class="container">
 		{% for product in products %}
 			<div class = 'product'>
 				<img class="product-image" src="{{product.image.url}}">
@@ -55,9 +64,7 @@
 				</div>
 				<button class='button-product'><img src="{% static "img/korzina.jpg"%}" 
 				style="height: 30px; width:30px; align: center"></button>
-			</div> 
-		{% empty %}
-			<p>There are no products</p>          	
+			</div>           	
 		{% endfor %}
 	</div>
 {% endblock %}

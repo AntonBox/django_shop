@@ -4,10 +4,17 @@ from django.core.urlresolvers import reverse
 from datetime import datetime
 
 
+def get_image_path(instance, filename):
+    return 'products_img/{0}/{1}/{2}/{3}'.format(datetime.now().year,
+                                                 datetime.now().month,
+                                                 datetime.now().day,
+                                                 filename)
+
+
 class Category(TimedModel):
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255)
-    image = models.ImageField(upload_to='categories')
+    image = models.ImageField(upload_to=get_image_path)
     description = models.TextField()
 
     def __str__(self):
@@ -18,13 +25,6 @@ class Category(TimedModel):
 
     def get_absolute_url(self):
         return reverse('view_category', kwargs={'slug': self.slug})
-
-
-def get_image_path(instance, filename):
-    return 'products_img/{0}/{1}/{2}/{3}'.format(datetime.now().year,
-                                                 datetime.now().month,
-                                                 datetime.now().day,
-                                                 filename)
 
 
 class Product (TimedModel):
