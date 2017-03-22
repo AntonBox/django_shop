@@ -3,10 +3,8 @@ from django.shortcuts import render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 
 from apps.cart.forms import EditItemForm, AddItemForm
-from apps.cart.models import CartItem, Cart
+from apps.cart.models import CartItem
 from apps.core.decorators import get_cart
-import random
-import string
 
 
 @csrf_exempt
@@ -17,16 +15,10 @@ def cart(request):
     return render(request, 'cart.html', {'cartitems': cartitems})
 
 
+@csrf_exempt
+@get_cart
 def add_cartitem(request):
-    if request.user.is_authenticated():
-        cart = request.user.get_user_cart()
-    elif 'token' in request.session:
-        token = request.session['token']
-        cart, _ = Cart.objects.get_or_create(token=token, status=Cart.OPEN)
-    else:
-        token = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for x in range(16))
-        request.session['token'] = token
-        cart, _ = Cart.objects.get_or_create(token=token, status=Cart.OPEN)
+    cart = request.cart
     form = AddItemForm(request.POST, cart=cart)
     if form.is_valid():
         obj = form.save(commit=False)

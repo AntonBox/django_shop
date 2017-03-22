@@ -1,36 +1,31 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
+from apps.core.decorators import get_cart_or_404
 
 from apps.cart.models import Cart
 from apps.order.forms import AddOrderForm
-import random
-import string
 
 
+@csrf_exempt
+@get_cart_or_404
 def order(request):
     if request.user.is_authenticated():
-        cart = request.user.get_user_cart()
-    elif 'token' in request.session:
-        token = request.session['token']
-        cart, _ = Cart.objects.get_or_create(token=token, status=Cart.OPEN)
+        user = request.user
+        cart = get_object_or_404(Cart, user=user, status=Cart.OPEN)
     else:
-        token = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for x in range(16))
-        request.session['token'] = token
-        cart, _ = Cart.objects.get_or_create(token=token, status=Cart.OPEN)
+        token = request.session['token']
+        cart = get_object_or_404(Cart, token=token, status=Cart.OPEN)
     total = cart.get_total()
-    form = AddOrderForm()
+    form = AddOrderForm(initial={'first_name': request.user.first_name,
+                                 'last_name': request.user.last_name,
+                                 'email': request.user.email})
     return render(request, 'order.html', {'total': total, 'form': form})
 
 
+@csrf_exempt
+@get_cart_or_404
 def confirm(request):
-    if request.user.is_authenticated():
-        cart = request.user.get_user_cart()
-    elif 'token' in request.session:
-        token = request.session['token']
-        cart, _ = Cart.objects.get_or_create(token=token, status=Cart.OPEN)
-    else:
-        token = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for x in range(16))
-        request.session['token'] = token
-        cart, _ = Cart.objects.get_or_create(token=token, status=Cart.OPEN)
+    cart = request.cart
     form = AddOrderForm(request.POST)
     if form.is_valid():
         cart.status = Cart.CLOSED
@@ -40,7 +35,7 @@ def confirm(request):
         if request.user.is_authenticated():
             obj.user = request.user
         else:
-            obj.token = token
+            obj.token = request.session['token']
         obj.save()
         return render(request, 'confirm.html')
     else:
