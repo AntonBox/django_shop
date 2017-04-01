@@ -48,9 +48,9 @@
 	<h3>Новинки</h3>
 	<br>
 		{% for category in categories %}
-			<div class = 'col-md-4'>
+			<div class = 'col-md-3'>
 				<img class="img-thumbnail" src="{{category.image.url}}">
-				<h4><a href="catalog/{{ category.get_absolute_url }}">{{category.name}}</h4></a>
+				<h4><a href="{{ category.get_absolute_url }}">{{category.name}}</h4></a>
 			</div>         	
 		{% endfor %}
 	</div>
