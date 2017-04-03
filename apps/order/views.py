@@ -1,24 +1,25 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from apps.core.decorators import get_cart_or_404
 
 from apps.cart.models import Cart
 from apps.order.forms import AddOrderForm
+from apps.accounts.models import User
+import random
+import string
 
 
 @csrf_exempt
 @get_cart_or_404
 def order(request):
-    if request.user.is_authenticated():
-        user = request.user
-        cart = get_object_or_404(Cart, user=user, status=Cart.OPEN)
-    else:
-        token = request.session['token']
-        cart = get_object_or_404(Cart, token=token, status=Cart.OPEN)
+    cart = request.cart
     total = cart.get_total()
-    form = AddOrderForm(initial={'first_name': request.user.first_name,
-                                 'last_name': request.user.last_name,
-                                 'email': request.user.email})
+    if request.user.is_authenticated():
+        form = AddOrderForm(initial={'first_name': request.user.first_name,
+                                     'last_name': request.user.last_name,
+                                     'email': request.user.email})
+    else:
+        form = AddOrderForm()
     return render(request, 'order.html', {'total': total, 'form': form})
 
 
@@ -35,8 +36,16 @@ def confirm(request):
         if request.user.is_authenticated():
             obj.user = request.user
         else:
-            obj.token = request.session['token']
-        obj.save()
+            # creation user
+            username = str(form.fields['last_name']) + str(random.randint(1, 99))
+            password = ''.join(random.choice(
+                string.ascii_uppercase +
+                string.ascii_lowercase + string.digits) for x in range(10))
+            user = User.objects.create_user(
+                username=username, password=password)
+            obj.user = user
+            cart.user = user
+            cart.save()
         return render(request, 'confirm.html')
     else:
         return render(request, 'order.html', {'form': form})
