@@ -4,9 +4,7 @@ from apps.core.decorators import get_cart_or_404
 
 from apps.cart.models import Cart
 from apps.order.forms import AddOrderForm
-from apps.accounts.models import User
-import random
-import string
+from apps.order.functions import create_user_order
 
 
 @csrf_exempt
@@ -36,13 +34,8 @@ def confirm(request):
         if request.user.is_authenticated():
             obj.user = request.user
         else:
-            # creation user
-            username = str(form.fields['last_name']) + str(random.randint(1, 99))
-            password = ''.join(random.choice(
-                string.ascii_uppercase +
-                string.ascii_lowercase + string.digits) for x in range(10))
-            user = User.objects.create_user(
-                username=username, password=password)
+            last_name = form.fields['last_name']
+            user = create_user_order(last_name)
             obj.user = user
             cart.user = user
             cart.save()
