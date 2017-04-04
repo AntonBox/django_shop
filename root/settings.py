@@ -26,6 +26,8 @@ WSGI_APPLICATION = 'root.wsgi.application'
 
 ROOT_URLCONF = 'root.urls'
 
+LOGIN_REDIRECT_URL = 'catalog'
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
