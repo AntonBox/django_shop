@@ -17,18 +17,18 @@ function addCart(productid){
 }
 
 // deleting product from cart
-function delCart(cartitemid, prodId){
-    
+function delCart(cartitemid){
     cartitemid = cartitemid;
     $.post(
         url = "/cart/del/",
         {cartitemid: cartitemid},
-        onDellSuccess.bind(null, prodId)
+        onDellSuccess.bind(null, cartitemid)
     );
 }
 
-function onDellSuccess(prodId){
-    $('input[id=' + prodId + ']').parent().remove();
+function onDellSuccess(cartitemid){
+    cartitemid = 'row' + cartitemid
+    $('div[id=' + cartitemid + ']').remove();
     alert("Product deleted");
 }
 
