@@ -26,6 +26,11 @@ WSGI_APPLICATION = 'root.wsgi.application'
 
 ROOT_URLCONF = 'root.urls'
 
+LOGIN_REDIRECT_URL = 'catalog'
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = '5944951'
+SOCIAL_AUTH_VK_OAUTH2_SECRET = '9sG1MzXSSHqV5x7rdbp2'
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,8 +42,16 @@ INSTALLED_APPS = [
     'apps.cart',
     'apps.catalog',
     'apps.core',
-    'apps.accounts'
+    'apps.accounts',
+    'social_django'
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.vk.VKOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -61,6 +74,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect'
             ],
         },
     },
