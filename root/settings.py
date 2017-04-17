@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'apps.catalog',
     'apps.core',
     'apps.accounts',
-    'social_django'
+    'bootstrapform',
+    'social_django',
 ]
 
 AUTHENTICATION_BACKENDS = (
