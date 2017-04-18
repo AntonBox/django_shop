@@ -37,7 +37,7 @@ def confirm(request):
             obj.user = user
             cart.user = user
             cart.save()
-        form.save()
+        obj.save()
         return render(request, 'confirm.html')
     else:
         return render(request, 'order.html', {'form': form})
