@@ -7,7 +7,6 @@ from apps.order.forms import AddOrderForm
 from apps.order.functions import create_user_order
 
 
-@csrf_exempt
 @get_cart_or_404
 def order(request):
     cart = request.cart
@@ -21,7 +20,6 @@ def order(request):
     return render(request, 'order.html', {'total': total, 'form': form})
 
 
-@csrf_exempt
 @get_cart_or_404
 def confirm(request):
     cart = request.cart
@@ -39,6 +37,7 @@ def confirm(request):
             obj.user = user
             cart.user = user
             cart.save()
+        form.save()
         return render(request, 'confirm.html')
     else:
         return render(request, 'order.html', {'form': form})
