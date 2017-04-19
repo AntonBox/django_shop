@@ -1,13 +1,13 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 from apps.cart.forms import EditItemForm, AddItemForm
 from apps.cart.models import CartItem
 from apps.core.decorators import get_cart
 
 
-@csrf_exempt
+@ensure_csrf_cookie
 @get_cart
 def cart(request):
     cart = request.cart
@@ -15,7 +15,6 @@ def cart(request):
     return render(request, 'cart.html', {'cartitems': cartitems})
 
 
-@csrf_exempt
 @get_cart
 def add_cartitem(request):
     cart = request.cart

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import ensure_csrf_cookie
 from apps.core.decorators import get_cart_or_404
 
 from apps.cart.models import Cart
@@ -7,6 +7,7 @@ from apps.order.forms import AddOrderForm
 from apps.order.functions import create_user_order
 
 
+@ensure_csrf_cookie
 @get_cart_or_404
 def order(request):
     cart = request.cart
@@ -20,6 +21,7 @@ def order(request):
     return render(request, 'order.html', {'total': total, 'form': form})
 
 
+@ensure_csrf_cookie
 @get_cart_or_404
 def confirm(request):
     cart = request.cart
