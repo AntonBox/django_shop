@@ -11,6 +11,7 @@
 {% endblock %}
 
 {% block content %}
+	<!--- CAROUSEL -->
 	<div class="container">
 		<br>
 		<div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -25,7 +26,7 @@
 		    <div class="carousel-inner" role="listbox">
 		    	{% for visual in visuals %}	
 			    <div class="item{% if forloop.first %} active {% endif %}">
-		        	<img src="{{ visual.img.url }}" alt="carousel image" width="1000" height="343">
+		        	<img src="{{ visual.img.url }}" alt="carousel image" width="1000" height="600">
 		        </div>
 		      	{% endfor %}
 		    </div>
@@ -40,31 +41,56 @@
 		    	<span class="sr-only">Next</span>
 			</a>
 		</div>
-
 	</div>
-
+<!--- CAROUSEL -->
 	<div class="container">
-	<br>
-	<h3>Новинки</h3>
-	<br>
-		{% for category in categories %}
-			<div class = 'col-md-3'>
-				<img class="img-thumbnail" src="{{category.image.url}}">
-				<h4><a href="{{ category.get_absolute_url }}">{{category.name}}</h4></a>
-			</div>         	
-		{% endfor %}
+	    <div id="heading-breadcrumbs" style="margin-top: 20px">
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-md-7">
+	                    <h1>Новинки</h1>
+	                </div>
+	                <div class="col-md-4">
+	                    <ul class="breadcrumb">
+	                        <li><a href="{% url 'index'%}">Home</a>
+	                        </li>
+	                        <li><a href="{% url 'catalog'%}">Все категории</a>
+	                        </li>
+	                    </ul>
+
+	                </div>
+	            </div>
+	        </div>
+	    </div>
 	</div>
-	<div class="container">
-		{% for product in products %}
-			<div class = 'product'>
-				<img class="product-image" src="{{product.image.url}}">
-				<h4><a href="#">{{product.name}}</h4></a>
-				<div class='price'>
-					{{product.price}}	
-				</div>
-				<button class='button-product'><img src="{% static "img/korzina.jpg"%}" 
-				style="height: 30px; width:30px; align: center"></button>
-			</div>           	
-		{% endfor %}
+
+
+	<div id="content">
+	    <div class="container">
+	    	<div class="row portfolio">
+	    		{% for product in products %}
+			        <div class="col-sm-6">
+			            <div class="box-image">
+			                <div class="image">
+			                    <img src="{{product.image.url}}" alt="" class="img-responsive">
+			                </div>
+			                <div class="bg"></div>
+			                <div class="name">
+			                    <h3><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h3> 
+			                </div>
+			                <div class="text">
+			                    <p class="hidden-sm">{{ product.description }}</p>
+			                    <p class="buttons">
+			                        <a href="{{ product.get_absolute_url }}" class="btn btn-template-transparent-primary">View</a>
+			                    </p>
+			                </div>
+			            </div>
+			        </div>
+		   		{% endfor %}
+		    </div>
+		</div>
 	</div>
+
+
+
 {% endblock %}

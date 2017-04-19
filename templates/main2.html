@@ -1,54 +1,9 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block extra_style %}
-	<style>
-.caption {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: 100%;
-  text-align: center;
-  color: #000;
-}
-.caption span.border {
-  background-color: #111;
-  color: #fff;
-  padding: 18px;
-  font-size: 25px;
-  letter-spacing: 10px;
-}
 
-	{% for category in categories %}
-.parallax{{ forloop.counter }}{
-    /* The image used */
-    background-image: url("{{category.image.url}}");
-
-    /* Set a specific height */
-    height: 800px;  
-
-    /* Create the parallax scrolling effect */
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-	}	
-	{% endfor %}
-	 </style>
 {% endblock %}
 
 {% block content %}
-	{% for category in categories %}
-		<div class="parallax{{ forloop.counter }}">
-			<div class="caption">
-   				<span class="border">OHRA</span>
-  			</div>
-		</div>
 
-		<div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px; ">
-			<a href="{{ category.get_absolute_url }}" style="text-align: center;font-size: 25px;">{{category.name}}</a> 
-			<br>
-			{{category.description}}
-		</div>
-
-	{% endfor %}
 {% endblock %}
