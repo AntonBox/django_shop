@@ -5,10 +5,16 @@ from datetime import datetime
 
 
 def get_image_path(instance, filename):
-    return 'products_img/{0}/{1}/{2}/{3}'.format(datetime.now().year,
-                                                 datetime.now().month,
-                                                 datetime.now().day,
-                                                 filename)
+    if isinstance(instance, Product):
+        return 'products_img/{0}/{1}/{2}/{3}'.format(datetime.now().year,
+                                                     datetime.now().month,
+                                                     datetime.now().day,
+                                                     filename)
+    elif isinstance(instance, Category):
+        return 'categories_img/{0}/{1}/{2}/{3}'.format(datetime.now().year,
+                                                       datetime.now().month,
+                                                       datetime.now().day,
+                                                       filename)
 
 
 class Category(TimedModel):

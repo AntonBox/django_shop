@@ -11,7 +11,9 @@
 {% endblock %}
 
 {% block content %}
+
 	<!--- CAROUSEL -->
+	{%if visuals%}
 	<div class="container">
 		<br>
 		<div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -42,28 +44,9 @@
 			</a>
 		</div>
 	</div>
+	{%else%}
+	{%endif%}
 <!--- CAROUSEL -->
-	<div class="container">
-	    <div id="heading-breadcrumbs" style="margin-top: 20px">
-	        <div class="container">
-	            <div class="row">
-	                <div class="col-md-7">
-	                    <h1>Новинки</h1>
-	                </div>
-	                <div class="col-md-4">
-	                    <ul class="breadcrumb">
-	                        <li><a href="{% url 'index'%}">Home</a>
-	                        </li>
-	                        <li><a href="{% url 'catalog'%}">Все категории</a>
-	                        </li>
-	                    </ul>
-
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	</div>
-
 
 	<div id="content">
 	    <div class="container">
