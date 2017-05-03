@@ -24,6 +24,10 @@ class Cart(TimedModel):
             total += price_for_item
         return total
 
+    def is_permitted_for_request(self, request):
+        if self.user == request.user or self.token == request.session['token']:
+            return True
+
 
 class CartItem(TimedModel):
     product = models.ForeignKey(Product)

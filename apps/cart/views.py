@@ -31,7 +31,7 @@ def add_cartitem(request):
 def change_cartitem(request):
     cartitem_id = request.POST.get('cartitemid')
     cartitem = get_object_or_404(CartItem, id=cartitem_id)
-    if cartitem.cart.user == request.user or cartitem.cart.token == request.session['token']:
+    if cartitem.cart.is_permitted_for_request(request):
         form = EditItemForm(request.POST, instance=cartitem)
         if form.is_valid():
             form.save()
@@ -45,7 +45,7 @@ def change_cartitem(request):
 def del_cartitem(request):
     cartitem_id = request.POST.get('cartitemid')
     cartitem = get_object_or_404(CartItem, id=cartitem_id)
-    if cartitem.cart.user == request.user or cartitem.cart.token == request.session['token']:
+    if cartitem.cart.is_permitted_for_request(request):
         cartitem.delete()
         return HttpResponse(status=200)
     else:
