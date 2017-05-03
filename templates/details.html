@@ -3,14 +3,19 @@
 {% load staticfiles %}
 {% block content %}
 
-		<div class = 'product'>
-			<img class="product-image" src="{{product.image.url}}">
-			<h4>{{product.name}}</h4></a>
-			<div class='price'>
-				{{product.price}}	
-			</div>
-			<button class='button-product'><img src="{% static "img/korzina.jpg"%}" 
-			style="height: 30px; width:30px; align: center"></button>
-		</div> 
+	<div class = 'container'>
+		<div class="col-md-5" style="margin-bottom: 30px">
+			<h4 style="margin-left: 30px">{{product.name}}</h4></a>
+			<img src="{{product.image.url}}" height="500px">
+			
+		</div>
+		<div class="col-md-4" style="margin-top: 250px">
+			<div style="margin-bottom: 25px">{{product.description}}</div>
+			<h4>Price: {{product.price}}</h4>
+			<button type="button" class="btn btn-success" id = '{{ product.id }}' onclick="addCart({{ product.id }})" style="margin-left: 30px; margin-top: 4px" >Buy</button>
+		</div>
+		
+
+	</div> 
 
 {% endblock %}
