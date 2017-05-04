@@ -1,18 +1,23 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 from apps.cart.forms import EditItemForm, AddItemForm
 from apps.cart.models import CartItem
+from apps.core.decorators import get_cart
 
 
+@ensure_csrf_cookie
+@get_cart
 def cart(request):
-    cart = request.user.get_user_cart()
+    cart = request.cart
     cartitems = cart.cartitems.all()
     return render(request, 'cart.html', {'cartitems': cartitems})
 
 
+@get_cart
 def add_cartitem(request):
-    cart = request.user.get_user_cart()
+    cart = request.cart
     form = AddItemForm(request.POST, cart=cart)
     if form.is_valid():
         obj = form.save(commit=False)
@@ -26,7 +31,7 @@ def add_cartitem(request):
 def change_cartitem(request):
     cartitem_id = request.POST.get('cartitemid')
     cartitem = get_object_or_404(CartItem, id=cartitem_id)
-    if cartitem.cart.user == request.user:
+    if cartitem.cart.is_permitted_for_request(request):
         form = EditItemForm(request.POST, instance=cartitem)
         if form.is_valid():
             form.save()
@@ -40,7 +45,7 @@ def change_cartitem(request):
 def del_cartitem(request):
     cartitem_id = request.POST.get('cartitemid')
     cartitem = get_object_or_404(CartItem, id=cartitem_id)
-    if cartitem.cart.user == request.user:
+    if cartitem.cart.is_permitted_for_request(request):
         cartitem.delete()
         return HttpResponse(status=200)
     else:
