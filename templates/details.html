@@ -3,6 +3,26 @@
 {% load staticfiles %}
 {% block content %}
 
+<!-- CROSS NAVIGATION -->
+    <div id="heading-breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <h1>Товары</h1>
+                </div>
+                <div class="col-md-5">
+                    <ul class="breadcrumb">
+                        <li><a href="{{ product.category.get_absolute_url }}">{{product.category}}</a>
+                        </li>
+                        <li>{{product.name}}</li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- CROSS NAVIGATION -->
+
 	<div class = 'container'>
 		<div class="col-md-5" style="margin-bottom: 30px">
 			<h4 style="margin-left: 30px">{{product.name}}</h4></a>
@@ -12,7 +32,7 @@
 		<div class="col-md-4" style="margin-top: 250px">
 			<div style="margin-bottom: 25px">{{product.description}}</div>
 			<h4>Price: {{product.price}}</h4>
-			<button type="button" class="btn btn-success" id = '{{ product.id }}' onclick="addCart({{ product.id }})" style="margin-left: 30px; margin-top: 4px" >Buy</button>
+			<button type="button" class="btn btn-success" id = '{{ product.id }}' onclick="addCart({{ product.id }})" style="margin-left: 30px; margin-top: 4px" >Добавить в корзину</button>
 		</div>
 		
 

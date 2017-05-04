@@ -19,9 +19,11 @@
 
                             <div class="login">
                                 {% if user.is_authenticated %}
-                                <a href="/account/logout/"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Sign up</span></a>
+                                <a href="#"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">{{user.username}}</span></a>
+                                <a href="{% url 'logout'%}" <i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Выйти</span></a>
                                 {% else %}
-                                <a href="/account/login/" data-toggle="modal" data-target="#login-modal"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Sign in</span></a>
+                                <a href="/account/registration/"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Зарегистрироваться</span></a>
+                                <a href="/account/login/" data-toggle="modal" data-target="#login-modal"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Войти</span></a>
                                 {% endif %}
                             </div>
 

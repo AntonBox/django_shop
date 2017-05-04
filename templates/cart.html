@@ -4,6 +4,28 @@
 
 
 {% block content %}
+
+<!-- CROSS NAVIGATION -->
+    <div id="heading-breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <h1>Корзина</h1>
+                </div>
+                <div class="col-md-5">
+                    <ul class="breadcrumb">
+                        <li><a href="{% url 'index'%}">Home</a>
+                        </li>
+                        <li><a href="{% url 'catalog'%}">Categories</a></li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- CROSS NAVIGATION -->
+
+
 	<div class = "container" style="margin-top: 30px">
 			{% for cartitem in cartitems %}
 				<div class="row" id="row{{cartitem.id}}" style="margin-bottom: 20px">
@@ -12,7 +34,7 @@
 					</div>
 					<div style="margin-top: 60px">
 						<div class="col-md-4">
-							<h4>{{cartitem.product.name}}</h4>
+							<h4><a href="{{ cartitem.product.get_absolute_url }}">{{cartitem.product.name}}</a></h4>
 							<p class="text-info">{{cartitem.product.price}}</p>
 						</div>
 						<div class="col-md-4">
@@ -26,11 +48,17 @@
 					</div>
 				</div>
 			{% empty %}
-					<h1>Your cart is empty now :(</h1>
+					<h1 class='text-center'>Your cart is empty now :(</h1>
 			{% endfor %}
+			{% if cartitems %}
 			<div class="col-md-12 text-center" style="margin-bottom: 40px">
-				<a href="{% url 'order' %}"><button type="button" class="btn btn-success">GO TO DEAL</button></a>
+				<a href="{% url 'order' %}"><button type="button" class="btn btn-success">Перейти к заказу</button></a>
 			</div>
+			{% else %}
+			<div class="col-md-12 text-center" style="margin-bottom: 40px">
+				<a href="{% url 'catalog' %}"><button type="button" class="btn btn-success">Вернуться в каталог</button></a>
+			</div>
+			{% endif %}
 		
 	</div>	
 {% endblock %}
