@@ -8,7 +8,8 @@ class Cart(TimedModel):
     OPEN = 'open'
     CLOSED = 'closed'
     status_choice = ((OPEN, 'Open'), (CLOSED, 'Closed'))
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
+    token = models.CharField(max_length=16, blank=True, null=True)
     status = models.CharField(max_length=6,
                               choices=status_choice, default=CLOSED)
 
@@ -22,6 +23,10 @@ class Cart(TimedModel):
             price_for_item = item.quantity * item.product.price
             total += price_for_item
         return total
+
+    def is_permitted_for_request(self, request):
+        if self.user == request.user or self.token == request.session['token']:
+            return True
 
 
 class CartItem(TimedModel):

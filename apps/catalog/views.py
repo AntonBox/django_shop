@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404
+from django.views.decorators.csrf import ensure_csrf_cookie
 from apps.catalog.models import Product, Category
 
 
+@ensure_csrf_cookie
 def products(request, slug=None):
     products = Product.objects.all()
     categories = Category.objects.all()
@@ -12,6 +14,7 @@ def products(request, slug=None):
                                             'categories': categories})
 
 
+@ensure_csrf_cookie
 def product(request, detail):
     product_for_detail = get_object_or_404(Product, detail=detail)
     return render(request, 'details.html',
