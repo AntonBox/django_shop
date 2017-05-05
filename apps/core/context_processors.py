@@ -15,8 +15,11 @@ def menu_cart(request):
             user = request.user
             cart = get_object_or_404(Cart, user=user, status=Cart.OPEN)
         else:
-            token = request.session['token']
-            cart = get_object_or_404(Cart, token=token, status=Cart.OPEN)
+            if 'token' in request.session:
+                token = request.session['token']
+                cart = get_object_or_404(Cart, token=token, status=Cart.OPEN)
+            else:
+                return {}
         total = cart.get_quantity()
         if total > 0:
             return {"total_menu": total}
