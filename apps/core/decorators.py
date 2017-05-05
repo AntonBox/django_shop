@@ -1,5 +1,6 @@
 from apps.cart.models import Cart
 from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
 import random
 import string
 
@@ -27,9 +28,11 @@ def get_cart_or_404(the_func):
         if request.user.is_authenticated():
             user = request.user
             cart = get_object_or_404(Cart, user=user, status=Cart.OPEN)
-        else:
+        elif 'token' in request.session:
             token = request.session['token']
             cart = get_object_or_404(Cart, token=token, status=Cart.OPEN)
+        else:
+            return redirect('catalog')
         request.cart = cart
         return the_func(request, *args, **kwargs)
     return _decorated
