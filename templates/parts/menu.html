@@ -32,24 +32,22 @@
 
 
 
-                                <!-- CONTACT -->
+                                <!-- Category -->
                                 <li class="dropdown">
                                     <a href="javascript: void(0)" class="dropdown-toggle" data-toggle="dropdown">Категории<b class="caret"></b></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="contact.html">Contact option 1</a>
-                                        </li>
-                                        <li><a href="contact2.html">Contact option 2</a>
-                                        </li>
-                                        <li><a href="contact3.html">Contact option 3</a>
-                                        </li>
-
+                                        {% for category in category_list%}
+                                            <li><a href="{{ category.get_absolute_url }}">{{category.name}}</a>
+                                            </li>
+                                        {% endfor %}
                                     </ul>
                                 </li>
-                                <!-- CONTACT -->
+                                <!-- Category -->
 
                                 <!-- Cart -->
+
                                 <li class="">
-                                    <a href="{% url 'cart'%}">Корзина</a>
+                                    <a href="{% url 'cart'%}">Корзина{%if total_menu%}<span class="badge badge-pill badge-danger">{{total_menu}}</span>{% endif %}</a>
                                 </li>
                                 
                                 <!-- Cart -->

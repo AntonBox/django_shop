@@ -24,15 +24,15 @@
 <!-- CROSS NAVIGATION -->
 
 	<div class = 'container'>
-		<div class="col-md-5" style="margin-bottom: 30px">
+		<div class="col-md-6" style="margin-bottom: 30px">
 			<h4 style="margin-left: 30px">{{product.name}}</h4></a>
 			<img src="{{product.image.url}}" height="500px">
 			
 		</div>
-		<div class="col-md-4" style="margin-top: 250px">
+		<div class="col-md-6" style="margin-top: 250px">
 			<div style="margin-bottom: 25px">{{product.description}}</div>
 			<h4>Price: {{product.price}}</h4>
-			<button type="button" class="btn btn-success" id = '{{ product.id }}' onclick="addCart({{ product.id }})" style="margin-left: 30px; margin-top: 4px" >Добавить в корзину</button>
+			<button type="button" class="btn btn-success" id = '{{ product.id }}' onclick="addCart({{ product.id }})" style="margin-top: 4px" >Добавить в корзину</button>
 		</div>
 		
 

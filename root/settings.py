@@ -76,7 +76,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'social_django.context_processors.backends',
-                'social_django.context_processors.login_redirect'
+                'social_django.context_processors.login_redirect',
+                'apps.core.context_processors.menu_category',
+                'apps.core.context_processors.menu_cart'
             ],
         },
     },
