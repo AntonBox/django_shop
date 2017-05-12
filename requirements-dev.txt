@@ -5,4 +5,4 @@ mock
 django-debug-toolbar
 django-test-without-migrations
 django-bootstrap-form
-social-auth-core
+social-auth-app-django
