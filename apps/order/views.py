@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import ensure_csrf_cookie
-from apps.core.decorators import get_cart_or_404
+from apps.core.decorators import cart_required
 
 from apps.cart.models import Cart
 from apps.order.forms import AddOrderForm
@@ -8,7 +8,7 @@ from apps.accounts.models import User
 
 
 @ensure_csrf_cookie
-@get_cart_or_404
+@cart_required
 def order(request):
     cart = request.cart
     total = cart.get_total()
@@ -22,7 +22,7 @@ def order(request):
 
 
 @ensure_csrf_cookie
-@get_cart_or_404
+@cart_required
 def confirm(request):
     cart = request.cart
     form = AddOrderForm(request.POST)

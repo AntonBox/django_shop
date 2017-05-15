@@ -4,18 +4,15 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 
 from apps.cart.forms import EditItemForm, AddItemForm
 from apps.cart.models import CartItem
-from apps.core.decorators import get_cart
 
 
 @ensure_csrf_cookie
-@get_cart
 def cart(request):
     cart = request.cart
     cartitems = cart.cartitems.all()
     return render(request, 'cart.html', {'cartitems': cartitems})
 
 
-@get_cart
 def add_cartitem(request):
     cart = request.cart
     form = AddItemForm(request.POST, cart=cart)

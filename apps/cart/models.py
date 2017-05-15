@@ -24,13 +24,6 @@ class Cart(TimedModel):
             total += price_for_item
         return total
 
-    def get_quantity(self):
-        cart_items = CartItem.objects.filter(cart=self)
-        quantity = 0
-        for item in cart_items:
-            quantity += 1
-        return quantity
-
     def is_permitted_for_request(self, request):
         if self.user == request.user or self.token == request.session['token']:
             return True
