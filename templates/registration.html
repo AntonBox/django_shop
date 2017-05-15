@@ -1,12 +1,17 @@
 {% extends "base.html" %}
 {% block title %}Registration{% endblock %}
+{% load bootstrap %}
 {% block content %}
+
 	
-<div class='container'>
+<div class='container' style="margin-bottom: 20px">
+<div class="col-md-5 col-sm-5">
 	<form action="{% url 'registration' %}" method="post">{% csrf_token %}
-			{{form.as_p}}
-		<input type="submit" value="Registr" />
+			{{ form|bootstrap }}
+		<button type="submit" class="btn btn-primary">Registr</button>
+		или Войти через <button class='btn-primary'><i class="fa fa-vk" aria-hidden="true"></i></button>
 	</form>
+</div>
 </div>	
 
 {% endblock %}
