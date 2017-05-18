@@ -41,6 +41,8 @@ class Product (TimedModel):
     description = models.TextField()
     quantity = models.PositiveIntegerField()
     image = models.ImageField(upload_to=get_image_path)
+    image2 = models.ImageField(upload_to=get_image_path)
+    image3 = models.ImageField(upload_to=get_image_path)
 
     def __str__(self):
         return self.name
