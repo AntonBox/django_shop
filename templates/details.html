@@ -8,7 +8,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-7">
-                    <h1>Товары</h1>
+                    <h1>{{product.name}}</h1>
                 </div>
                 <div class="col-md-5">
                     <ul class="breadcrumb">
@@ -22,20 +22,133 @@
         </div>
     </div>
 <!-- CROSS NAVIGATION -->
+<div id="content">
+    <div class = 'container'>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="row" id="productMain">
 
-	<div class = 'container'>
-		<div class="col-md-6" style="margin-bottom: 30px">
-			<h4 style="margin-left: 30px">{{product.name}}</h4></a>
-			<img src="{{product.image.url}}" height="500px">
-			
-		</div>
-		<div class="col-md-6" style="margin-top: 250px">
-			<div style="margin-bottom: 25px">{{product.description}}</div>
-			<h4>Price: {{product.price}}</h4>
-			<button type="button" class="btn btn-success" id = '{{ product.id }}' onclick="addCart({{ product.id }})" style="margin-top: 4px" >Добавить в корзину</button>
-		</div>
-		
+            		<div class="col-sm-6">
+            			
+            			<img src="{{product.image.url}}" width="430px">
+            			
+            		</div>
 
-	</div> 
+            <!-- CROSS NAVIGATION --><!-- CROSS NAVIGATION --><!-- CROSS NAVIGATION -->
+                    <div class="col-sm-6">  
+                        <div class="box">
+                            <form>
+                                <div class="sizes">
+                                    <h3>Доступные размеры</h3>
+                                    <label for="size_s">
+                                        <a href="#">S</a>
+                                        <input type="radio" id="size_s" name="size" value="s" class="size-input">
+                                    </label>
+                                    <label for="size_m">
+                                        <a href="#">M</a>
+                                        <input type="radio" id="size_m" name="size" value="m" class="size-input">
+                                    </label>
+                                    <label for="size_l">
+                                        <a href="#">L</a>
+                                        <input type="radio" id="size_l" name="size" value="l" class="size-input">
+                                    </label>
+                                </div>
+
+                                <p class="price">₴ {{product.price}}</p>
+
+                                <p class="text-center">
+                                    <button type="button" class="btn btn-success" id = '{{ product.id }}' onclick="addCart({{ product.id }})" style="margin-top: 4px" >Добавить в корзину</button>
+                                </p>
+
+                            </form>
+                        </div>
+                        <div class="row" id="thumbs"> 
+                            <div class="col-xs-4">
+                                <a href="{{product.image3.url}}" class="thumb">
+                                    <img src="{{product.image.url}}" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                            <div class="col-xs-4">
+                                <a href="{{product.image2.url}}" class="thumb">
+                                    <img src="{{product.image2.url}}" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                            <div class="col-xs-4">
+                                <a href="{{product.image3.url}}" class="thumb">
+                                    <img src="{{product.image3.url}}" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box" id="details">
+                    <p>
+                        <h4>Описание товара</h4>
+                        <p>{{product.description}}</p>
+                        
+
+                        <blockquote>
+                            <p><em>{{product.category.description}}</em>
+                            </p>
+                        </blockquote>
+                </div>
+
+                <!-- last products -->
+                <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="box text-uppercase">
+                            <h3>Возможно вам понравится что-то из этого</h3>
+                        </div>
+                    </div>
+                    {% for product in latest_products %}
+                    <div class="col-md-3 col-sm-6">
+                        <div class="product">
+                            <div class="image">
+                                <a href="#">
+                                    <img src="{{product.image.url}}" alt="" class="img-responsive image1">
+                                </a>
+                            </div>
+                            <div class="text">
+                                <h3>{{product.name}}</h3>
+                                <p class="price">₴{{product.price}}</p>
+
+                            </div>
+                        </div>
+                        <!-- /.product -->
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+    <!-- CROSS NAVIGATION --><!-- CROSS NAVIGATION --><!-- CROSS NAVIGATION -->
+
+
+            <!-- *** MENUS AND FILTERS ***
+        _________________________________________________________ -->
+            <div class="col-sm-3">
+                <div class="panel panel-default sidebar-menu">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Ladies</h3>
+                    </div>
+
+                    <div class="panel-body">
+                        <ul class="nav nav-pills nav-stacked category-menu">
+                            <li class="active">
+                                <a href="{% url 'catalog'%}">Все категории</a>
+                                <ul>
+                                    {% for category in category_list%}
+                                    <li><a href="{{ category.get_absolute_url }}">{{category.name}}</a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>
 
 {% endblock %}

@@ -17,5 +17,7 @@ def products(request, slug=None):
 @ensure_csrf_cookie
 def product(request, detail):
     product_for_detail = get_object_or_404(Product, detail=detail)
+    latest_products = Product.objects.order_by('created_at').all()[:3]
     return render(request, 'details.html',
-                  {'product': product_for_detail})
+                  {'product': product_for_detail,
+                   'latest_products': latest_products})
