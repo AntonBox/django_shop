@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- Python 3.5
+- Python 3.5 or higher
 - pip
 - virtualenv (or pew)
 - PostgreSQL
@@ -23,8 +23,8 @@
 In the project directory:
 
 ```
-    virtualenv .env
-    source .env/bin/activate
+    virtualenv -p python3 env
+    source env/bin/activate
 ```
 
 ### 2. Install dependencies
@@ -38,7 +38,7 @@ In the project directory:
 #### Pillow package dependencies:
 
 ```
-    sudo apt-get install libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk
+    sudo apt-get install libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk libpq-dev postgresql postgresql-contrib
 ```
 
 #### Django dependencies:
@@ -61,7 +61,7 @@ In the project directory:
 
 ```
     sudo -i -u postgres
-    createuser shop -P
+    createuser shop -P   (use password "shop")
     createdb shop -O shop
     exit
 ```
@@ -82,5 +82,7 @@ In the project directory:
 ### 6. Run project:
 
 ```
+    python manage.py runserver
+    or
     make run
 ```
