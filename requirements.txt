@@ -6,4 +6,4 @@ djangorestframework==3.5.0
 
 django-loginas==0.2.3
 
-mkdocs==0.15.3
+mkdocs==1.1.2
