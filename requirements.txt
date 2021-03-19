@@ -2,7 +2,7 @@ Pillow==3.4.2
 psycopg2
 
 Django==1.10.2
-djangorestframework==3.5.0
+djangorestframework==3.11.2
 
 django-loginas==0.2.3
 
