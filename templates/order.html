@@ -2,6 +2,25 @@
 {% load bootstrap %}
 {% block title %}Order{% endblock %}
 {% block content %}
+<!-- CROSS NAVIGATION -->
+    <div id="heading-breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <h1>Корзина</h1>
+                </div>
+                <div class="col-md-5">
+                    <ul class="breadcrumb">
+                        <li><a href="{% url 'index'%}">Home</a>
+                        </li>
+                        <li><a href="{% url 'cart'%}">Корзина</a></li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- CROSS NAVIGATION -->
 
 	<div class="container" style="margin-bottom: 20px">
 		<div class="col-md-4 text-center">

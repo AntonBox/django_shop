@@ -4,24 +4,26 @@
 
 
 {% block content %}
+
+<!-- CROSS NAVIGATION -->
     <div id="heading-breadcrumbs">
         <div class="container">
             <div class="row">
                 <div class="col-md-7">
-                    <h1>Все категории</h1>
+                    <h1>Товары</h1>
                 </div>
                 <div class="col-md-5">
                     <ul class="breadcrumb">
                         <li><a href="{% url 'index'%}">Home</a>
                         </li>
-                        <li>Categories</li>
+                        <li><a href="{% url 'catalog'%}">Categories</a></li>
                     </ul>
 
                 </div>
             </div>
         </div>
     </div>
-
+<!-- CROSS NAVIGATION -->
 
 	<div id="content">
         <div class="container">
@@ -72,13 +74,13 @@ _________________________________________________________ -->
                     <div class="panel panel-default sidebar-menu">
 
                         <div class="panel-heading">
-                            <h3 class="panel-title">Categories</h3>
+                            <h3 class="panel-title">Ladies</h3>
                         </div>
 
                         <div class="panel-body">
                             <ul class="nav nav-pills nav-stacked category-menu">
                                 <li class="active">
-                                    <a href="#">Ladies </a>
+                                    <a href="{% url 'catalog'%}">Все категории</a>
                                     <ul>
                                     	{% for category in categories%}
                                         <li><a href="{{ category.get_absolute_url }}">{{category.name}}</a>
